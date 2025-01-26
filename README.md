@@ -32,3 +32,59 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+// Lession:
+https://www.youtube.com/watch?v=Big_aFLmekI&t=4193s
+
+// For menu
+npx shadcn-ui@latest add sheet -> this was not working so did the one below
+npx shadcn@latest add sheet
+
+// For form
+npx shadcn@latest add form
+npx shadcn@latest add input
+
+// install axios
+npm i axios
+
+// toast element 
+npm i react-hot-toast
+
+// database schema installation
+npm i -D prisma
+also intall
+npm instakk @prisma/client
+npx prisma init // to initiate 
+DATABASE_URL="mysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
+DATABASE_URL="mysql://root:password@localhost:3306/mydatabase"
+
+npx prisma generate 
+npx prisma db push
+
+// to check the database
+npx prisma studio
+
+// making values available from the url we define [] in folder name such as 
+[courseId] folder so that we ca get course id from url
+
+
+// npx shadcn-ui@latest add textarea
+
+## For uploading go to uploadthing.com and create account
+in this we upload the image so using this service
+https://docs.uploadthing.com/getting-started/appdir
+for old one we using
+https://v6.docs.uploadthing.com/
+npm install uploadthing @uploadthing/react
+
+# css for the uploadthing image we need to modify tailwind.config.js and also go to app/globals.css
+when image upload issue then we need to add hostname in next.config.js file
+
+# For the popover and combobox 
+https://ui.shadcn.com/docs/components/combobox
+need to install it for usage
+https://ui.shadcn.com/docs/components/popover#installation
+npx shadcn@latest add popover
+
+also we need to install command
+npx shadcn@latest add command
+# repacollage
