@@ -87,4 +87,11 @@ npx shadcn@latest add popover
 
 also we need to install command
 npx shadcn@latest add command
-# repacollage
+# repacollage for connecting database category we need seeding so create scripts folder in root and make seed.ts file inside
+then we run file using
+node scripts/seed.ts
+
+#prisma schema to add model run
+npx prisma generate
+# also we have to do 
+npx prisma db push
