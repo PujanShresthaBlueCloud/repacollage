@@ -26,9 +26,7 @@ import { cn } from "@/lib/utils";
 
 //declaring database schema getting the description attribute to be update
 const formSchema = z.object({
-    description: z.string().min(1, {
-        message: "Description is required",
-    })
+    title: z.string().min(1)
 })
 
 interface ChaptersFormProps {
@@ -42,10 +40,11 @@ export const ChaptersForm = ({
     initialData,
     courseId 
 }:ChaptersFormProps) => {
-    const [isEditing, setIsEditing] = useState(false);
+    const [isCreating, setIsCreating] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
     const toggleEdit = () => setIsEditing((current)=> !current);
     const router = useRouter();
-
+    console.log("initial data chapter ", initialData)
     //database connection for the description and getting all the initial data i.e, description
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
