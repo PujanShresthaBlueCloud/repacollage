@@ -45,7 +45,8 @@ export const ChaptersForm = ({
     const [isUpdating, setIsUpdating] = useState(false);
     const toggleCreating = () => setIsCreating((current)=> !current);
     const router = useRouter();
-    console.log("initial data chapter ", initialData)
+    
+    // console.log("initial data chapter ", initialData)
     //database connection for the title and getting all the initial data i.e, title
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),

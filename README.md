@@ -98,3 +98,6 @@ npx prisma db push
 
 # Use this for reorder the list 
 npm i @hello-pangea/dnd
+
+# adding batch
+npx shadcn@latest add badge
