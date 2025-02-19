@@ -95,3 +95,6 @@ node scripts/seed.ts
 npx prisma generate
 # also we have to do 
 npx prisma db push
+
+# Use this for reorder the list 
+npm i @hello-pangea/dnd

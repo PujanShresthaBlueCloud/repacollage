@@ -6,7 +6,8 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { Course } from "@prisma/client";
+import { Course, Chapter } from "@prisma/client";
+import { ChaptersList } from "./chapters-list";
 
 // importing all from component form
 import {
@@ -30,7 +31,7 @@ const formSchema = z.object({
 })
 
 interface ChaptersFormProps {
-    initialData: Course
+    initialData: Course & {chapters: Chapter[]}
     courseId: string;
 };
 
@@ -44,7 +45,7 @@ export const ChaptersForm = ({
     const [isUpdating, setIsUpdating] = useState(false);
     const toggleCreating = () => setIsCreating((current)=> !current);
     const router = useRouter();
-    // console.log("initial data chapter ", initialData)
+    console.log("initial data chapter ", initialData)
     //database connection for the title and getting all the initial data i.e, title
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -110,9 +111,17 @@ export const ChaptersForm = ({
                     </Form>
                 )}
                 {!isCreating && (
-                    <div>
-                        No chapter
-                    </div>
+                    <p className={cn(
+                        "text-sm mt-2",
+                        !initialData.chapters.length && "text-slate-500 italic"
+                    )}>
+                        {!initialData.chapters.length && "No chapter"}
+                        <ChaptersList
+                            onEdit={() => {}}
+                            onReorder={() => {}}
+                            items={initialData.chapters || []}
+                        />
+                    </p>
                 )}
                 {!isCreating && (
                     <p className="text-xs text-muted-forground mt-4">
