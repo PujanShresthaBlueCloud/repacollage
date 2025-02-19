@@ -19,9 +19,9 @@ import {
     FormMessage,
     FormField,
 } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+import { Pencil, PlusCircle} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 //declaring database schema getting the description attribute to be update
@@ -42,81 +42,82 @@ export const ChaptersForm = ({
 }:ChaptersFormProps) => {
     const [isCreating, setIsCreating] = useState(false);
     const [isUpdating, setIsUpdating] = useState(false);
-    const toggleEdit = () => setIsEditing((current)=> !current);
+    const toggleCreating = () => setIsCreating((current)=> !current);
     const router = useRouter();
-    console.log("initial data chapter ", initialData)
-    //database connection for the description and getting all the initial data i.e, description
+    // console.log("initial data chapter ", initialData)
+    //database connection for the title and getting all the initial data i.e, title
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            description: initialData?.description || ""
+            title: ""
         }
     })
     const { isSubmitting, isValid } = form.formState;
     const onSubmit = async (values:z.infer<typeof formSchema>) => {
         if (!courseId) throw new Error("courseId is required");
         try {
-            await axios.patch(`/api/courses/${courseId}`, values)
-            toast("Course update successfully");
-            toggleEdit();
+            console.log("values for chapter ----- ",  values)
+            await axios.post(`/api/courses/${courseId}/chapters`, values)
+            toast("Chapter created successfully");
+            toggleCreating();
             router.refresh();
         } catch(error){
-            toast.error("Something went wronge while updating description");
-            console.log("Description updating error", error)
+            toast.error("Something went wronge while updating chapter");
+            console.log("Chapter updating error", error)
         }
     }
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Course description
-                <Button onClick={toggleEdit} variant="ghost">
-                    {isEditing ? (
+                Course chapter
+                <Button onClick={toggleCreating} variant="ghost">
+                    {isCreating ? (
                             <>Cancel</>
                         ):(
                             <>
-                                <Pencil className="h-4 w-4 mr-2" />
-                                Edit description
+                                <PlusCircle className="h-4 w-4 mr-2" />
+                                Add a chapter
                             </>
                         )
                     }
                 </Button>
             </div>
             <div>
-                {!isEditing && (
-                    <p className={cn(
-                        "text-sm -2",
-                        !initialData.description && "text-slate-500 italic"
-                    )}>
-                        {!initialData.description? "No description availble": initialData.description}
-                    </p>
-                )}
-                {isEditing && (
+                {isCreating && (
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}
                         className="space-y-4 mt-4"
                         >
                             <FormField
                                 control={form.control}
-                                name="description"
+                                name="title"
                                 render={({field})=>(
                                     <FormItem>
                                         <FormControl>
-                                            <Textarea 
+                                            <Input 
                                                 disabled={isSubmitting}
-                                                placeholder="e.g. This course is about ..."
+                                                placeholder="Introduction to the course"
                                                 {...field}
                                             />
                                         </FormControl>
                                     </FormItem>
                                 )}
                             />
-                            <div className="flex item-center gap-x-2">
-                                <Button disabled={!isValid || isSubmitting} type="submit">
-                                    Save
-                                </Button>
-                            </div>
+                            <Button disabled={!isValid || isSubmitting} type="submit">
+                                Create
+                            </Button>
                         </form>
                     </Form>
+                )}
+                {!isCreating && (
+                    <div>
+                        No chapter
+                    </div>
+                )}
+                {!isCreating && (
+                    <p className="text-xs text-muted-forground mt-4">
+                        Drag and drop to reorder chapters
+                    </p>
                 )}
             </div>
         </div>
