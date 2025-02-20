@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2, Pencil, PlusCircle} from "lucide-react";
+import { Loader2, PlusCircle} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 //declaring database schema getting the description attribute to be update
@@ -84,7 +84,18 @@ export const ChaptersForm = ({
         } finally {
             setIsUpdating(false);
         }
-    } 
+    }
+    const onEdit = async (id: String) => {
+        try {
+            router.push(`/teacher/courses/${courseId}/chapters/${id}`);
+            toast.success("Edit completed successfully");
+            router.refresh();
+        } catch (error) {
+            toast.error("Something went wrong on edit");
+            console.log("ON EDIT ERROR", error);
+        }
+
+    }
     return (
         <div className="relative mt-6 border bg-slate-100 rounded-md p-4">
             { isUpdating && (
@@ -140,7 +151,7 @@ export const ChaptersForm = ({
                     )}>
                         {!initialData.chapters.length && "No chapter"}
                         <ChaptersList
-                            onEdit={() => {}}
+                            onEdit={onEdit}
                             onReorder={onReorder}
                             items={initialData.chapters || []}
                         />
