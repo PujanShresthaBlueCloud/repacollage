@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 // function for submission of form as Post
 export async function POST (
-    req: Request, // to get the url we do req: request
+    req: Request, // to get the name of the form we do req: request
     {params}: {params: {courseId:string}}
 ){
     try{

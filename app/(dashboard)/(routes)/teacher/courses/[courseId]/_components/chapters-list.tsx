@@ -14,7 +14,7 @@ import { on } from "events";
 
 interface ChapterListProps {
     items: Chapter[],
-    onReorder: (updateData: {id: String; position: number}[]) => void;
+    onReorder: (updateData: {id: string; position: number}[]) => void;
     onEdit: (id: String) => void;
 }
 export const ChaptersList = ({
@@ -33,13 +33,33 @@ export const ChaptersList = ({
     useEffect(()=>{
         setChapters(items)
     },[items])
-    
+
+    const onDragEnd = (result: DropResult) => {
+        if(!result.destination) return;
+        const items = Array.from(chapters);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+
+        const startIndex = Math.min(result.source.index, result.destination.index);
+        const endIndex = Math.max(result.source.index, result.destination.index);
+
+        const updatedChapters = items.slice(startIndex, endIndex + 1);
+        setChapters(items)
+
+        const bulkUpdatedData = updatedChapters.map((chapter) => ({
+            id: chapter.id,
+            position: items.findIndex((item) => item.id === chapter.id)
+        }));
+
+        onReorder(bulkUpdatedData);
+
+    }
     if (!isMounted) {
         return null;
     }
 
     return (
-        <DragDropContext onDragEnd={()=>{}}>
+        <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="chapters">
                 {(provided) => (
                     <div {...provided.droppableProps} ref={provided.innerRef}>
@@ -64,13 +84,11 @@ export const ChaptersList = ({
                                             )}
                                             {...provided.dragHandleProps}
                                         >
-                                            <Grip
-                                                className="h-5 w-5"
-                                            />
+                                            <Grip className="h-5 w-5"/>
                                         </div>
                                         {chapter.title}
                                         <div className="ml-auto pr-2 flex items-center gap-x-2">
-                                            {chapter.isFree && (
+                                            { chapter.isFree && (
                                                 <Badge>
                                                     Free
                                                 </Badge>
@@ -81,7 +99,7 @@ export const ChaptersList = ({
                                                     chapter.isPublish && "bg-sky-700"
                                                 )}
                                             >
-                                                {chapter.isPublish ? "Published" : "Draft"}
+                                                { chapter.isPublish ? "Published" : "Draft" }
                                             </Badge>
                                             <Pencil
                                                 onClick={() => onEdit(chapter.id)}

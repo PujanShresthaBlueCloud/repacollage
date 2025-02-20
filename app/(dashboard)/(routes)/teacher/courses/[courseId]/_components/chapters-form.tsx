@@ -45,7 +45,7 @@ export const ChaptersForm = ({
     const [isUpdating, setIsUpdating] = useState(false);
     const toggleCreating = () => setIsCreating((current)=> !current);
     const router = useRouter();
-    
+
     // console.log("initial data chapter ", initialData)
     //database connection for the title and getting all the initial data i.e, title
     const form = useForm<z.infer<typeof formSchema>>({
@@ -68,6 +68,23 @@ export const ChaptersForm = ({
             console.log("Chapter updating error", error)
         }
     }
+
+    // making array of object is like this {}[] as in below code
+    const onReorder = async (updatedData: {id: String, position: number}[]) => {
+        try {
+            setIsUpdating(true);
+            await axios.put(`/api/courses/${courseId}/chapters/reorder`, {
+                list: updatedData
+            });
+            toast.success("Chapters reordered");
+            router.refresh()
+        } catch(error){
+            toast.error("Something went wrong here ");
+            console.log("ON REORDER ERROR", error);
+        } finally {
+            setIsUpdating(false);
+        }
+    } 
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
@@ -119,7 +136,7 @@ export const ChaptersForm = ({
                         {!initialData.chapters.length && "No chapter"}
                         <ChaptersList
                             onEdit={() => {}}
-                            onReorder={() => {}}
+                            onReorder={onReorder}
                             items={initialData.chapters || []}
                         />
                     </p>
