@@ -11,6 +11,7 @@ interface PreviewProps {
 export const Preview = ({
     value
 }: PreviewProps) => {
+    // use client is not enough to load this so we need to write the following code
     const ReactQuill = useMemo(() => dynamic(() => import("react-quill"), { ssr: false }), [])
 
     return (

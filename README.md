@@ -104,3 +104,6 @@ npx shadcn@latest add badge
 
 # install react quill
 npm i react-quill
+
+# check box from shadcn
+npx shadcn@latest add checkbox

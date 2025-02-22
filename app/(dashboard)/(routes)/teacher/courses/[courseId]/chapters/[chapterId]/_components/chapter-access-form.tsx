@@ -24,13 +24,14 @@ import { Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Editor } from "@/components/editor";
 import { Preview } from "@/components/preview";
+import { Checkbox } from "@/components/ui/checkbox";
 
 //declaring database schema getting the description attribute to be update
 const formSchema = z.object({
-    description: z.string().min(1)
+    isFree: z.boolean().default(false)
 })
 
-interface ChapterDescriptionFormProps {
+interface ChapterAccessFormProps {
     initialData: Chapter;
     courseId: string;
     chapterId: string;
@@ -38,11 +39,11 @@ interface ChapterDescriptionFormProps {
 
 
 //Description form component
-export const ChapterDescriptionForm = ({
+export const ChapterAccessForm = ({
     initialData,
     courseId,
     chapterId,
-}:ChapterDescriptionFormProps) => {
+}:ChapterAccessFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const toggleEdit = () => setIsEditing((current)=> !current);
     const router = useRouter();
@@ -51,7 +52,7 @@ export const ChapterDescriptionForm = ({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            description: initialData?.description || ""
+            isFree: !!initialData.isFree
         }
     })
     const { isSubmitting, isValid } = form.formState;
@@ -70,14 +71,14 @@ export const ChapterDescriptionForm = ({
     return (
         <div className="mt-6 border bg-slate-100 rounded-md p-4">
             <div className="font-medium flex items-center justify-between">
-                Chapter description
+                Chapter access
                 <Button onClick={toggleEdit} variant="ghost">
                     {isEditing ? (
                             <>Cancel</>
                         ):(
                             <>
                                 <Pencil className="h-4 w-4 mr-2" />
-                                Edit description
+                                Edit access
                             </>
                         )
                     }
@@ -85,17 +86,15 @@ export const ChapterDescriptionForm = ({
             </div>
             <div>
                 {!isEditing && (
-                    <div className={cn(
+                    <p className={cn(
                         "text-sm -2",
-                        !initialData.description && "text-slate-500 italic"
+                        !initialData.isFree && "text-slate-500 italic"
                     )}>
-                        {!initialData.description && "No description availble"}
-                        {initialData && 
-                            <Preview 
-                                value={initialData.description || ""}
-                            />
-                        }
-                    </div>
+                        {initialData.isFree ? (
+                            <>This chapter is free for preview.</>
+                        ): <>This chapter is not free.</>
+                       }
+                    </p>
                 )}
                 {isEditing && (
                     <Form {...form}>
@@ -104,14 +103,20 @@ export const ChapterDescriptionForm = ({
                         >
                             <FormField
                                 control={form.control}
-                                name="description"
+                                name="isFree"
                                 render={({field})=>(
-                                    <FormItem>
+                                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
                                         <FormControl>
-                                            <Editor 
-                                                {...field}
+                                            <Checkbox 
+                                                checked={field.value}
+                                                onCheckedChange={field.onChange}
                                             />
                                         </FormControl>
+                                        <div className="space-y-1 leading-none">
+                                            <FormDescription>
+                                                Check this box if you want to make this chapter free for preview
+                                            </FormDescription>
+                                        </div>
                                     </FormItem>
                                 )}
                             />

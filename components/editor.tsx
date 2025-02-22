@@ -13,6 +13,7 @@ export const Editor = ({
     onChange,
     value
 }: EditorProps) => {
+    // Use client is not enough to load the page so need to write the following code
     const ReactQuill = useMemo(() => dynamic(() => import("react-quill"), { ssr: false }), [])
 
 
