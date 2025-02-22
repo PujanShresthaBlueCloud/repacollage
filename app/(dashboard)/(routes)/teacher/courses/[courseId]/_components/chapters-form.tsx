@@ -88,7 +88,7 @@ export const ChaptersForm = ({
     const onEdit = async (id: String) => {
         try {
             router.push(`/teacher/courses/${courseId}/chapters/${id}`);
-            toast.success("Edit completed successfully");
+            toast.success("Editing...");
             router.refresh();
         } catch (error) {
             toast.error("Something went wrong on edit");

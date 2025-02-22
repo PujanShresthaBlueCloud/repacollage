@@ -101,3 +101,6 @@ npm i @hello-pangea/dnd
 
 # adding batch
 npx shadcn@latest add badge
+
+# install react quill
+npm i react-quill
