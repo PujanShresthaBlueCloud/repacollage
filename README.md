@@ -107,3 +107,8 @@ npm i react-quill
 
 # check box from shadcn
 npx shadcn@latest add checkbox
+
+# For mux data
+https://dashboard.mux.com/login
+pujan_sth@yahoo.com
+PujanStha666
