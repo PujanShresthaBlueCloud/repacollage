@@ -115,3 +115,7 @@ PujanStha666
 
 npm i @mux/mux-node
 npm i @mux/mux-player-react
+
+
+# now we need to add 
+npx shadcn@latest add alert-dialog
