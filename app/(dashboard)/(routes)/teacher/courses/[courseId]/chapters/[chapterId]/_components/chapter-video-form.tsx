@@ -22,7 +22,6 @@ interface ChapterVideoFormProps {
     chapterId: string
 };
 
-
 //Description form component
 export const ChapterVideoForm = ({
     initialData,

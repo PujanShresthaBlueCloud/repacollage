@@ -51,7 +51,6 @@ export async function PATCH(
                 }
             });
             if ( existingMuxData ) {
-            console.log(" inside patch existing data ----", existingMuxData)
                 try {
                     const test =  await mux.video.assets.delete(existingMuxData.assetId);
                     await db.muxData.delete({
@@ -64,14 +63,11 @@ export async function PATCH(
                 }
             }
 
-            console.log("Try in ---------")
             const asset = await mux.video.assets.create({
                 input: values.videoUrl,
                 playback_policy: ["public"],
                 test: false,
             });
-            console.log("Mux Asset Created: ------ ", asset.id);
-          console.log("asset id below ", asset.id)
             
             await db.muxData.create({
                 data: {
