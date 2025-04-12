@@ -85,7 +85,7 @@ export const ImageForm = ({
                         <FileUpload
                             endpoint="courseImage"
                             onChange={(url)=> {
-                                console.log("url is heree!!! ", url)
+                                // console.log("url is heree!!! ", url)
                                 if(url){
                                     onSubmit({imageURL: url})
                                 }

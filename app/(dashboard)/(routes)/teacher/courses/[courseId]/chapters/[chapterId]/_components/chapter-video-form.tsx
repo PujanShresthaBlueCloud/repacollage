@@ -9,14 +9,14 @@ import { ImageIcon, Pencil, PlusCircle, Video } from "lucide-react";
 import { Chapter, Course, MuxData } from "@prisma/client";
 import { FileUpload } from "@/components/file-upload";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import MuxPlayer from "@mux/mux-player-react";
 
 //declaring database schema getting the description attribute to be update
 const formSchema = z.object({
     videoUrl: z.string().min(1)
 })
 
-interface ChapterVideoProps {
+interface ChapterVideoFormProps {
     initialData: Chapter & { muxData?: MuxData | null };
     courseId: string;
     chapterId: string
@@ -24,11 +24,11 @@ interface ChapterVideoProps {
 
 
 //Description form component
-export const ChapterVideo = ({
+export const ChapterVideoForm = ({
     initialData,
     courseId,
     chapterId,
-}:ChapterVideoProps) => {
+}:ChapterVideoFormProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const toggleEdit = () => setIsEditing((current)=> !current);
     const router = useRouter();
@@ -36,12 +36,13 @@ export const ChapterVideo = ({
         if (!courseId) throw new Error("courseId is required");
         try {
             await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values)
+            // await axios.post(`/api/courses/${courseId}/chapters/${chapterId}`, values)
             toast("Course update successfully");
             toggleEdit();
             router.refresh();
         } catch ( error ) {
-            toast.error("Something went wronge while updating Image");
-            console.log("Image updating error", error)
+            toast.error("Something went wrong while updating video ");
+            console.log("Video updating error in chapter video form", error)
         }
     }
     return (
@@ -75,7 +76,9 @@ export const ChapterVideo = ({
                         </div>
                     ) :
                     <div className="relative aspect-video mt-2">
-                        Video uploaded!
+                        <MuxPlayer
+                            playbackId={initialData?.muxData?.playbackId || ""}
+                        />
                     </div>
 
                 )}

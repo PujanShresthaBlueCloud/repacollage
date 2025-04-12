@@ -7,7 +7,7 @@ export async function PUT(
     {params}: {params: {courseId: string}}
 ){
     try {
-        console.log("Inside reorder route")
+        // console.log("Inside reorder route")
         const { userId } = auth()
         if (!userId) {
             return new NextResponse("Unauthorized user ", {status: 401});

@@ -58,7 +58,7 @@ export const ChapterDescriptionForm = ({
     const onSubmit = async (values:z.infer<typeof formSchema>) => {
         if (!courseId) throw new Error("courseId is required");
         try {
-            await axios.post(`/api/courses/${courseId}/chapters/${chapterId}`, values)
+            await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, values)
             toast.success("Chapter update successfully");
             toggleEdit();
             router.refresh();

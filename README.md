@@ -112,3 +112,6 @@ npx shadcn@latest add checkbox
 https://dashboard.mux.com/login
 pujan_sth@yahoo.com
 PujanStha666
+
+npm i @mux/mux-node
+npm i @mux/mux-player-react
