@@ -1,8 +1,9 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Trash } from "lucide-react"
-import { boolean, string } from "zod"
+import { Button } from "@/components/ui/button";
+import { Trash } from "lucide-react";
+import { boolean, string } from "zod";
+import { ConfirmModal } from "@/components/modals/confirm-modal";
 
 interface ChapterActionsProps {
     disabled: boolean,
@@ -28,9 +29,12 @@ export const ChapterActions = ({
             >
                 {isPublish ? "Unpublish" : "Publish"}
             </Button>
-            <Button size="sm">
-                <Trash className="h-4 w-4" />
-            </Button>
+            <ConfirmModal onConfrim={()=>{}}>
+                <Button size="sm">
+                    <Trash className="h-4 w-4" />
+                </Button>
+            </ConfirmModal>
+            
         </div>
     )
 }
