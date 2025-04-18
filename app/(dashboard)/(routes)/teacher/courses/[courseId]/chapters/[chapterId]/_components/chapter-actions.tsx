@@ -30,18 +30,21 @@ export const ChapterActions = ({
             console.log(" inside on click")
             setIsLoading ( true );
             if ( isPublish ) {
-                await axios.patch ( `/api/courses/${courseId}/chapters/${chapterId}/unpublish` );
-                toast.success("Chapter unpublished")
+                console.log(" inside is if publish")
+                await axios.patch (`/api/courses/${courseId}/chapters/${chapterId}/unpublish`);
+                toast.success("Chapter unpublished");
             } else {
+                console.log("inside else ")
                 await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}/publish`);
-                toast.success("Chapter published")
+                toast.success("Chapter published");
             }
+            router.refresh();
         } catch (error) {
             toast.error("Error on chapter publish");
-            console.log("Error on publish");
+            console.log("Error on publish", error);
 
         } finally {
-            setIsLoading ( false );
+            setIsLoading(false);
         }
     }
 

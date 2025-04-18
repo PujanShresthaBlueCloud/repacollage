@@ -21,49 +21,20 @@ export async function PATCH(
         if(!ownCourse){
             return new NextResponse("Unauthorized Course Owner", { status:401 });
         }
-        const chapter = await db.chapter.findUnique({
-            where: {
-                id: params.chapterId,
-                courseId: params.courseId
-            }
-        });
-        const muxData = await db.muxData.findUnique({
-            where: {
-                chapterId: params.chapterId
-            }
-        })
-        if(!chapter || !muxData || !chapter.title || !chapter.description || !chapter.videoUrl){
-            return new NextResponse("Missing Required Fields", { status: 400 });
-        }
+        
         const publishedChapter = await db.chapter.update({
             where: {
                 id: params.chapterId,
                 courseId: params.courseId,
             },
             data: {
-                isPublish: true
-            }
-        })
-        const publishedChapterInCourse = await db.chapter.findMany({
-            where: {
-                courseId: params.courseId,
                 isPublish: false
             }
-        });
-        if(!publishedChapterInCourse.length){
-            await db.course.update({
-                where: {
-                    id: params.courseId
-                },
-                data: {
-                    isPublish: false
-                }
-            });
-        }
+        })
         return NextResponse.json(publishedChapter);
     } catch(error){
-        toast.error("Error on Publish route");
-        console.log("[CHAPTER_PUBLISH_ROUTE]", error);
+        toast.error("Error on UnPublish route");
+        console.log("[CHAPTER_UNPUBLISH_ROUTE]", error);
         return new NextResponse("Internal Error", { status:500 })
     }
     
