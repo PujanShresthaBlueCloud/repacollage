@@ -33,7 +33,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Lession:
+## Lesson:
 https://www.youtube.com/watch?v=Big_aFLmekI&t=4193s
 
 // For menu
@@ -110,13 +110,11 @@ npm i react-quill
 npx shadcn@latest add checkbox
 
 # For mux data
-https://dashboard.mux.com/login
-pujan_sth@yahoo.com
-PujanStha666
+create account and check login details and get the token id and token secret
 
 npm i @mux/mux-node
 npm i @mux/mux-player-react
 
 
-# now we need to add 
+# now we need to add alert dialog
 npx shadcn@latest add alert-dialog
