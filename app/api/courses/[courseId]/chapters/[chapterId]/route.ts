@@ -17,7 +17,6 @@ export async function DELETE(
     { params }: { params: { courseId: string, chapterId: string } }
 ){
     try {
-        console.log("chapter id ", params.chapterId)
         const { userId } = auth();
         if ( !userId ) {
             return new NextResponse("Unauthorized User", { status: 401 });
@@ -39,7 +38,6 @@ export async function DELETE(
                 courseId: params.courseId
             }
         });
-        console.log("chapter detail ", chapter)
         if ( !chapter ) {
             return new NextResponse("Chapter Not Found", { status: 404 } );
         }
