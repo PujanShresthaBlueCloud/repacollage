@@ -29,7 +29,6 @@ export async function PATCH(
         return new NextResponse("Course Not Found", {status: 404});
     }
     const hasPublishedChapter = course.chapters.some((chapter)=> chapter.isPublish);
-    console.log("Has published chapter", hasPublishedChapter);
 
     if(!course.title || !course.description || !course.imageURL || !course.categoryId || !hasPublishedChapter){
         return new NextResponse("Missing Required Fields", {status: 401});

@@ -14,8 +14,7 @@ import { PriceForm } from "./_components/price-form";
 import { AttachmentForm } from "./_components/attachment-form";
 import { ChaptersForm } from "./_components/chapters-form";
 import { Banner } from "@/components/banner";
-import { Actions } from "@/app/(dashboard)/_components/actions";
-
+import { Actions } from "./_components/actions";
 
 // when inside the large bracket [courseId] we can assess the courseId automaticaly
 // params to get the course attributes
@@ -48,7 +47,6 @@ const CourseIdPage = async ({ params }: { params: {courseId: string}}) => {
         },
     });
 
-    console.log("course ", course)
     if (!course) {
         return redirect("/");
     }

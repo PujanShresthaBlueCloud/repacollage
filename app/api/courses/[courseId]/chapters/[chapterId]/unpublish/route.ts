@@ -22,7 +22,7 @@ export async function PATCH(
             return new NextResponse("Unauthorized Course Owner", { status:401 });
         }
         
-        const publishedChapter = await db.chapter.update({
+        const unPublishedChapter = await db.chapter.update({
             where: {
                 id: params.chapterId,
                 courseId: params.courseId,
@@ -41,7 +41,7 @@ export async function PATCH(
                 isPublish: false
             }
         });
-        return NextResponse.json(publishedChapter);
+        return NextResponse.json(unPublishedChapter);
     } catch(error){
         toast.error("Error on UnPublish route");
         console.log("[CHAPTER_UNPUBLISH_ROUTE]", error);

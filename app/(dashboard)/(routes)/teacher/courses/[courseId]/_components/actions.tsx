@@ -7,6 +7,7 @@ import { ConfirmModal } from "@/components/modals/confirm-modal";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useConfettiStore } from "@/hooks/use-confetti-store";
 
 interface ActionsProps {
     disabled: boolean,
@@ -19,8 +20,9 @@ export const Actions = ({
     courseId,
     isPublish
 }: ActionsProps) => {
-    const [ isLoading, setIsLoading ] = useState( false );
     const router = useRouter();
+    const confetti = useConfettiStore();
+    const [ isLoading, setIsLoading ] = useState( false );
     const onClick =  async () => {
         try {
             setIsLoading ( true );
@@ -29,7 +31,8 @@ export const Actions = ({
                 toast.success("Course unpublished");
             } else {
                 await axios.patch(`/api/courses/${courseId}/publish`);
-                toast.success("Course published");
+                toast.success("Course Published");
+                confetti.onOpen();
             }
             router.refresh();
         } catch (error) {

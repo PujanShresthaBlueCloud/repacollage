@@ -118,3 +118,8 @@ npm i @mux/mux-player-react
 
 # now we need to add alert dialog
 npx shadcn@latest add alert-dialog
+
+# For the section of course publish and unpublish
+npm i zustand
+and again install
+npm i react-confetti
