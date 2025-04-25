@@ -31,6 +31,16 @@ export async function PATCH(
                 isPublish: false
             }
         })
+
+        const course = await db.course.update({
+            where: {
+                id: params.courseId,
+                userId,
+            },
+            data: {
+                isPublish: false
+            }
+        });
         return NextResponse.json(publishedChapter);
     } catch(error){
         toast.error("Error on UnPublish route");

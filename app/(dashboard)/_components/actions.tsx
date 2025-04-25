@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
-import { boolean, string } from "zod";
 import { ConfirmModal } from "@/components/modals/confirm-modal";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -13,7 +12,6 @@ interface ActionsProps {
     disabled: boolean,
     courseId: string,
     isPublish: boolean
-
 }
 
 export const Actions = ({
