@@ -17,9 +17,6 @@ export async function DELETE(
     { params } : { params: { courseId:string }}
 ){
     try {
-        console.log("Inside the DELETE FUNCTION ROUTE" , params.courseId);
-        console.log(params.courseId)
-        
         const { userId } = auth();
         if(!userId) {
             console.log("No authorized user!!!")
@@ -58,7 +55,7 @@ export async function DELETE(
                 id: params.courseId,
             }
         })
-
+        
         return  NextResponse.json(deletedCourse);
 
     } catch(error) {

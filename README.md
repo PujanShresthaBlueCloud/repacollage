@@ -130,3 +130,5 @@ npx shadcn@latest add table
 npm install @tanstack/react-table
 
 we will render the data table inside the page course page which we just had kept the NEW COURSE button
+add dropdown menu
+npx shadcn@latest add dropdown-menu
