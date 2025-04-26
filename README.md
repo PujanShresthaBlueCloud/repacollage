@@ -123,3 +123,10 @@ npx shadcn@latest add alert-dialog
 npm i zustand
 and again install
 npm i react-confetti
+
+## For data table 
+https://ui.shadcn.com/docs/components/data-table
+npx shadcn@latest add table
+npm install @tanstack/react-table
+
+we will render the data table inside the page course page which we just had kept the NEW COURSE button
