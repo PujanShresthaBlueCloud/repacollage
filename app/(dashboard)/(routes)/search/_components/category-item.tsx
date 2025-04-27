@@ -18,14 +18,10 @@ export const CategoryItem = ({
     const pathname = usePathname();
     const router = useRouter(); 
     const searchParams = useSearchParams();
-
     const currentCategoryId = searchParams.get("categoryId");
-    console.log("current catefory id ", currentCategoryId)
-
     const currentTitle = searchParams.get("title");
     const isSelected = currentCategoryId === value;
-    console.log("value id", value);
-    console.log("is selected", isSelected);
+    
     const onClick = ()=>{
         const url = qs.stringifyUrl({
             url: pathname,

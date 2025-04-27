@@ -4,7 +4,8 @@ import { UserButton } from "@clerk/nextjs";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from './ui/button';
 import { LogOut } from 'lucide-react';
-import Link  from 'next/link'
+import Link  from 'next/link';
+import { SearchInput } from "./search-input";
 
 
 export const NavbarRoutes = () => {
@@ -12,31 +13,36 @@ export const NavbarRoutes = () => {
     const routes = useRouter() // we use hook
 
     // Using isTeacherPage and isPlayerPage to router according to the page
-    const isTeacherPage = pathname?.startsWith("/teacher")
-    const isPlayerPage = pathname?.includes("/chapter")
-
+    const isTeacherPage = pathname?.startsWith("/teacher");
+    const isPlayerPage = pathname?.includes("/chapter");
+    const isSearchPage = pathname === "/search";
     return (
-        <div className="flex gap-x-2 ml-auto">
-            {isTeacherPage || isPlayerPage ?(
-                <Link href="/">
-                    <Button size="sm" variant="ghost">
-                        <LogOut/>
-                        Exit
-                    </Button>
-                </Link>
-            ): (
-                <Link href="/teacher/courses">
-                    <Button size="sm" variant="ghost">
-                        Teacher mode
-                    </Button>
-                </Link>
-
+        <>
+            {isSearchPage && (
+                <div className="hidden md:block">
+                    <SearchInput />
+                </div>
             )}
-            <UserButton 
-            afterSwitchSessionUrl="/"
-            />
-            
+            <div className="flex gap-x-2 ml-auto">
+                {isTeacherPage || isPlayerPage ?(
+                    <Link href="/">
+                        <Button size="sm" variant="ghost">
+                            <LogOut/>
+                            Exit
+                        </Button>
+                    </Link>
+                ): (
+                    <Link href="/teacher/courses">
+                        <Button size="sm" variant="ghost">
+                            Teacher mode
+                        </Button>
+                    </Link>
 
-        </div>
+                )}
+                <UserButton 
+                afterSwitchSessionUrl="/"
+                />
+            </div>
+        </>
     )
 }

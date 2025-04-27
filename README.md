@@ -138,7 +138,12 @@ https://ui.shadcn.com/docs/components/data-table#filtering
 
 
 # Student part starts
-First install query-string
+### First install query-string and react icons
 npm i query-string
 and install 
 npm i react-icons
+
+For matching the categories need to check the seed.tsx and categories name otherwise it will not be displayed
+### Creating the hook we need to go to hooks folder
+create new file use-debounce.ts
+here debounce means what ever user type on search field we don't want to query each letter to database so we pause for 500ms for query to be execute.
