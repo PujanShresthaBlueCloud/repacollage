@@ -132,3 +132,6 @@ npm install @tanstack/react-table
 we will render the data table inside the page course page which we just had kept the NEW COURSE button
 add dropdown menu
 npx shadcn@latest add dropdown-menu
+
+### Now for filtering the data or for searching the table we use data table filter in shadcn
+https://ui.shadcn.com/docs/components/data-table#filtering
