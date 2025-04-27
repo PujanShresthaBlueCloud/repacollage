@@ -135,3 +135,10 @@ npx shadcn@latest add dropdown-menu
 
 ### Now for filtering the data or for searching the table we use data table filter in shadcn
 https://ui.shadcn.com/docs/components/data-table#filtering
+
+
+# Student part starts
+First install query-string
+npm i query-string
+and install 
+npm i react-icons
