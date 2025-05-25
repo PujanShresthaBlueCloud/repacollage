@@ -147,3 +147,9 @@ For matching the categories need to check the seed.tsx and categories name other
 ### Creating the hook we need to go to hooks folder
 create new file use-debounce.ts
 here debounce means what ever user type on search field we don't want to query each letter to database so we pause for 500ms for query to be execute.
+
+After we add code in schema.prisma we need to run
+npx prisma generate
+
+And run 
+npx prisma db push
