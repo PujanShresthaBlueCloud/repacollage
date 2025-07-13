@@ -143,7 +143,7 @@ npm i query-string
 and install 
 npm i react-icons
 
-For matching the categories need to check the seed.tsx and categories name otherwise it will not be displayed
+For matching the categories need to check the scripts/seed.tsx and categories name otherwise it will not be displayed
 ### Creating the hook we need to go to hooks folder
 create new file use-debounce.ts
 here debounce means what ever user type on search field we don't want to query each letter to database so we pause for 500ms for query to be execute.
@@ -153,3 +153,15 @@ npx prisma generate
 
 And run 
 npx prisma db push
+
+
+Added unique purchase in Purchase schema because we have to make user purchase the course only one time can't purchase the same course twice. so aded 
+  @@unique([userId, courseId]) line and we run in terminal
+  npx prisma generate
+  npx prisma db push
+  and run dev again
+  npm run dev
+
+check the prisma studio if we lost the data then we have to run seed.ts i.e,
+scripts/seed.ts in terminal run command below:
+node scripts/seed.ts
