@@ -176,3 +176,6 @@ npx prisma db push
 such as get-chapters.ts.
 
 # we are creating component such as videoPlayer in chapter so inside [chapterId] we create _component
+
+# We are adding seperator
+npx shadcn@latest add separator
