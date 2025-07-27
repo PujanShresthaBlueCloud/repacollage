@@ -165,3 +165,14 @@ Added unique purchase in Purchase schema because we have to make user purchase t
 check the prisma studio if we lost the data then we have to run seed.ts i.e,
 scripts/seed.ts in terminal run command below:
 node scripts/seed.ts
+
+# To reset the database in prisma studio 
+npx prisma migrate reset
+
+After reset we need to do 
+npx prisma db push
+
+# we are making functions in actions floder to get courses progress and chapters 
+such as get-chapters.ts.
+
+# we are creating component such as videoPlayer in chapter so inside [chapterId] we create _component
