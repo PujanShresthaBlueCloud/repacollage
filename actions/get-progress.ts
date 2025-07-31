@@ -19,7 +19,7 @@ export const getProgress = async (
             where: {
                 userId: userId,
                 chapterId: {
-                    in: publishedChapters,
+                    in: publishedChaptersIds,
                 },
                 isCompleted: true,
             }

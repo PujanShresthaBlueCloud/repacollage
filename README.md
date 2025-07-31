@@ -179,3 +179,24 @@ such as get-chapters.ts.
 
 # We are adding seperator
 npx shadcn@latest add separator
+
+## stripe
+After setting up the strip account we put the secret key to .env file and we have to install stripe
+npm i stripe
+after installing we make a file inside lib folder
+stripe.ts
+After getting stripe key in we have to make file for checkout so
+inside the app folder inside courses  inside [courseId] we make new folder called checkout and here we make route.ts file
+### stripe login must be done 
+run the command below to get the secret stripe webhook secret and add them in .env file
+And create a folder inside app inside the api folder  called webhook
+create a route.ts in it
+
+we need run the below command to check the stripe status in local host 
+stripe listen --forward-to localhost:3000/api/webhook
+
+
+# stripe
+this should be added in middleware.ts
+for webhook to work 
+'/api/webhook'
